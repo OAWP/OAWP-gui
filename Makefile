@@ -3,14 +3,14 @@ CC = gcc
 CFLAGS = -O2 $(shell pkg-config --cflags gtk+-3.0 glib-2.0)
 SRC = ./src/*.c
 
-BIN = xawp-gui
+BIN = oawp-gui
 BUILD_DIR = ./build/
 BIN_INSTALL_DIR = /usr/bin/
 
 UI = ./ui/*.ui
 ICO = ./icons/*.svg
 USR_SHARE_DIR = /usr/share/
-RES_INSTALL_DIR = $(USR_SHARE_DIR)xawp/
+RES_INSTALL_DIR = $(USR_SHARE_DIR)oawp/
 UI_INSTALL_DIR = $(RES_INSTALL_DIR)ui/
 ICO_INSTALL_DIR = $(RES_INSTALL_DIR)icons/
 

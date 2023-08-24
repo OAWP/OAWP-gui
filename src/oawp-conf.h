@@ -1,30 +1,30 @@
 /*
  * Copyright (C) 2023 TheRealOne78 <bajcsielias78@gmail.com>
  *
- * This file is part of the XAWP project
+ * This file is part of the OAWP project
  *
- * XAWP is free software: you can redistribute it and/or modify
+ * OAWP is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * XAWP is distributed in the hope that it will be useful,
+ * OAWP is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with XAWP. If not, see <http://www.gnu.org/licenses/>.
+ * along with OAWP. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __XAWP_CONF_H__
- #define __XAWP_CONF_H__
+#ifndef __OAWP_CONF_H__
+ #define __OAWP_CONF_H__
 
 
 /* ==STRUCTURES== */
 
 struct XawpConfValues {
-  char version[VERSION_MAX];       /* Version of XAWP-gui */
+  char version[VERSION_MAX];       /* Version of OAWP-gui */
   char path[PATH_MAX];             /* Image path */
   double time;                     /* Frame pause time */
   char debug[6];                   /* Debug: True/False (bool to string) */
@@ -34,19 +34,19 @@ struct XawpConfValues {
 
 /* ==FUNCTIONS== */
 
-/* Read configs from conf file and save the values into *xawpConfValues */
-int XAWP_CONF_ReadConfig(
-    struct XawpConfValues *xawpConfValues,  /* Values to save the values */
+/* Read configs from conf file and save the values into *oawpConfValues */
+int OAWP_CONF_ReadConfig(
+    struct XawpConfValues *oawpConfValues,  /* Values to save the values */
     char confPath[PATH_MAX]);               /* File to read from */
 
 /* Write the settings into the specified conf file path */
-int XAWP_CONF_WriteConfig(
-    struct XawpConfValues *xawpConfValues,  /* Values to be written */
+int OAWP_CONF_WriteConfig(
+    struct XawpConfValues *oawpConfValues,  /* Values to be written */
     char confPath[PATH_MAX]);               /* File to write */
 
-/* Clear the contents of *xawpConfValues */
-void XAWP_CONF_Clear(
-    struct XawpConfValues *xawpConfValues); /* Values to clear */
+/* Clear the contents of *oawpConfValues */
+void OAWP_CONF_Clear(
+    struct XawpConfValues *oawpConfValues); /* Values to clear */
 
 
-#endif /* __XAWP_CONF_H__ */
+#endif /* __OAWP_CONF_H__ */

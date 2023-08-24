@@ -1,19 +1,19 @@
 /*
  * Copyright (C) 2023 TheRealOne78 <bajcsielias78@gmail.com>
- * This file is part of the XAWP project
+ * This file is part of the OAWP project
  *
- * XAWP is free software: you can redistribute it and/or modify
+ * OAWP is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * XAWP is distributed in the hope that it will be useful,
+ * OAWP is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with XAWP. If not, see <http://www.gnu.org/licenses/>.
+ * along with OAWP. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /* Gtk */
@@ -33,10 +33,10 @@
 #include <errno.h>
 #include <libgen.h>
 
-/* XAWP created headers */
+/* OAWP created headers */
 #include "info.h"
 #include "fancy-text.h"
-#include "xawp-gui.h"
+#include "oawp-gui.h"
 #include "dir-handler.h"
 #include "history.h"
 
@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
   GApplication *app;
   int status;
 
-  app = gtk_application_new("net.gui.XAWP", G_APPLICATION_FLAGS_NONE);
+  app = gtk_application_new("net.gui.OAWP", G_APPLICATION_FLAGS_NONE);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
   status = g_application_run(G_APPLICATION(app), argc, argv);
   g_object_unref(app);
@@ -90,7 +90,7 @@ static void activate(GApplication *app, gpointer user_data) {
   GObject *window_grid_bottom_status_bar; /* (GtkStatusBar) */
 
   /* == Stacks and their childs == */
-  /* To add stacks, see ./xawp-gui.h at `struct stacks` */
+  /* To add stacks, see ./oawp-gui.h at `struct stacks` */
   struct stacks stacks_w;
 
   /* === builder_popup === */
@@ -342,7 +342,7 @@ static void activate(GApplication *app, gpointer user_data) {
 
   /* Do all miscellaneous things for initial setup */
   gtk_header_bar_set_title(
-      GTK_HEADER_BAR(window_headerbar), "XAWP-gui");
+      GTK_HEADER_BAR(window_headerbar), "OAWP-gui");
 
   gtk_window_set_transient_for(
       GTK_WINDOW(popup_about_info), GTK_WINDOW(window));
@@ -361,7 +361,7 @@ static void activate(GApplication *app, gpointer user_data) {
   gtk_main();
 }
 
-static GtkFileFilter *get_xawp_file_filter() {
+static GtkFileFilter *get_oawp_file_filter() {
   /* Add 'conf', 'cfg' and 'config' extensions filter and return it */
   GtkFileFilter *filter = gtk_file_filter_new();
 
@@ -369,7 +369,7 @@ static GtkFileFilter *get_xawp_file_filter() {
   gtk_file_filter_add_pattern(filter, "*.cfg");
   gtk_file_filter_add_pattern(filter, "*.config");
 
-  gtk_file_filter_set_name(filter, "XAWP files");
+  gtk_file_filter_set_name(filter, "OAWP files");
 
   return filter;
 }
@@ -389,8 +389,8 @@ static void on_select_configuration_file(GtkWidget *widget, gpointer data) {
   /* Set the default directory it should open by default */
   gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(nativeChooser), default_config_path);
 
-  /* Add 'XAWP files' filter option by default */
-  gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(nativeChooser), get_xawp_file_filter());
+  /* Add 'OAWP files' filter option by default */
+  gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(nativeChooser), get_oawp_file_filter());
 
   /* Add 'All files' filter option */
   GtkFileFilter *all_files_filter = gtk_file_filter_new();

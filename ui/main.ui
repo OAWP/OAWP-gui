@@ -88,9 +88,9 @@
                     <property name="can-focus">False</property>
                     <property name="halign">center</property>
                     <property name="hexpand">False</property>
-                    <property name="xpad">10</property>
-                    <property name="ypad">10</property>
-                    <property name="pixbuf">../icons/logo_gradient_236x66_v2.svg</property>
+                    <property name="xpad">20</property>
+                    <property name="ypad">20</property>
+                    <property name="pixbuf">../icons/OAWP_logo_v2.svg</property>
                   </object>
                   <packing>
                     <property name="left-attach">0</property>
@@ -272,6 +272,7 @@
 Select or Create '+' a new configuration file to begin.</property>
                         <property name="justify">center</property>
                         <property name="ellipsize">start</property>
+                        <property name="width-chars">47</property>
                       </object>
                       <packing>
                         <property name="name">page0</property>

@@ -1,20 +1,20 @@
 /*
  * Copyright (C) 2023 TheRealOne78 <bajcsielias78@gmail.com>
  *
- * This file is part of the XAWP project
+ * This file is part of the OAWP project
  *
- * XAWP is free software: you can redistribute it and/or modify
+ * OAWP is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * XAWP is distributed in the hope that it will be useful,
+ * OAWP is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with XAWP. If not, see <http://www.gnu.org/licenses/>.
+ * along with OAWP. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <stdio.h>
@@ -24,7 +24,7 @@
 #include "info.h"
 
 void puts_logo() {
-  /* Outputs XAWP ascii logo with lolcat, a tool to
+  /* Outputs OAWP ascii logo with lolcat, a tool to
    * color text on terminal with gradient.
    * Not a hard dependency */
   if(system("[[ $(command -v lolcat) ]]") == 0) {
@@ -33,7 +33,7 @@ void puts_logo() {
     }
   }
 
-  /* Outputs XAWP ascii logo without gradient */
+  /* Outputs OAWP ascii logo without gradient */
   else {
     printf("\n" /* print logo */
       KYEL" /$$   /$$"  KRED"  /$$$$$$ "  KMAG" /$$      /$$"  KBCYN" /$$$$$$$ "  RST"\n"
