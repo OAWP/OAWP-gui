@@ -23,28 +23,17 @@
 #                                                                      #
 ########################################################################
 
+# Default variables
+#: "${CMAKE_BINARY_DIR:=$(mktemp --directory)}"
+: "${CMAKE_BINARY_DIR:="./build"}"
+: "${CMAKE_SOURCE_DIR:="./src/"}"
+: "${CMAKE_BUILD_TYPE:="Debug"}"
+
 # SOURCE
-. ./sh/logging.sh
-. ./sh/cmake.sh
-. ./sh/chkroot.sh # Check for ROOT id
+. ./cmake.sh
 
-# Install Dependencies
-sh ./sh/prepare.sh
-EXIT_CODE=${?}
-if [ ${EXIT_CODE} -ne 0 ]; then
-    exit ${EXIT_CODE};
-fi
-
-# Configure a CMake project
+# Configure project
 cmake_init
 
-# Build the project
+# Build the project with all threads
 cmake_build
-
-# Install the project in the system
-cmake_install
-
-## Clean the project
-#cmake_clean
-
-log_info "Done. Have a nice day!"

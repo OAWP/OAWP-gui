@@ -1,5 +1,3 @@
-#!/usr/bin/env sh
-
 ## Copyright_notice ####################################################
 #                                                                      #
 # SPDX-License-Identifier: GPL-3.0-or-later                            #
@@ -23,28 +21,50 @@
 #                                                                      #
 ########################################################################
 
-# SOURCE
-. ./sh/logging.sh
-. ./sh/cmake.sh
-. ./sh/chkroot.sh # Check for ROOT id
+# Colors
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+BLUE="\033[34m"
+MAGENTA="\033[35m"
+CYAN="\033[36m"
+WHITE="\033[37m"
 
-# Install Dependencies
-sh ./sh/prepare.sh
-EXIT_CODE=${?}
-if [ ${EXIT_CODE} -ne 0 ]; then
-    exit ${EXIT_CODE};
-fi
+# Formatting
+BOLD="\033[1m"
+UNDERLINE="\033[4m"
 
-# Configure a CMake project
-cmake_init
+# Misc
+ENDCOLOR="\033[0m" # Reset color and formatting
 
-# Build the project
-cmake_build
+# Sequences [colored]
+INFO="[${BLUE}I${ENDCOLOR}]"
+WARN="[${YELLOW}W${ENDCOLOR}]"
+ERR="[${RED}E${ENDCOLOR}]"
 
-# Install the project in the system
-cmake_install
+: "${LOG_FILE:="./logfile.log"}"
 
-## Clean the project
-#cmake_clean
+uncolor_sequence() {
+    sed -E 's/\\\033\[[0-9;]*m//g'
+}
 
-log_info "Done. Have a nice day!"
+log_info() {
+    message="$1"
+    timestamp="$(date +'%Y-%m-%d %H:%M:%S')"
+    printf "%s %s: %s\n" "${INFO}" "${timestamp}" "${message}"
+    printf "%s %s: %s\n" "${INFO}" "${timestamp}" "${message}" | uncolor_sequence >> "${LOG_FILE}"
+}
+
+log_warn() {
+    message="$1"
+    timestamp="$(date +'%Y-%m-%d %H:%M:%S')"
+    printf "%s %s: %s\n" "${WARN}" "${timestamp}" "${message}"
+    printf "%s %s: %s\n" "${WARN}" "${timestamp}" "${message}" | uncolor_sequence >> "${LOG_FILE}"
+}
+
+log_err() {
+    message="$1"
+    timestamp="$(date +'%Y-%m-%d %H:%M:%S')"
+    printf "%s %s: %s\n" "${ERR}" "${timestamp}" "${message}" >&2
+    printf "%s %s: %s\n" "${ERR}" "${timestamp}" "${message}" | uncolor_sequence >> "${LOG_FILE}"
+}

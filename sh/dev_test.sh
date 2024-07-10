@@ -23,28 +23,8 @@
 #                                                                      #
 ########################################################################
 
-# SOURCE
-. ./sh/logging.sh
-. ./sh/cmake.sh
-. ./sh/chkroot.sh # Check for ROOT id
+# Configure project and build it
+. ./dev_build.sh
 
-# Install Dependencies
-sh ./sh/prepare.sh
-EXIT_CODE=${?}
-if [ ${EXIT_CODE} -ne 0 ]; then
-    exit ${EXIT_CODE};
-fi
-
-# Configure a CMake project
-cmake_init
-
-# Build the project
-cmake_build
-
-# Install the project in the system
-cmake_install
-
-## Clean the project
-#cmake_clean
-
-log_info "Done. Have a nice day!"
+# Run unit tests
+cmake_test
