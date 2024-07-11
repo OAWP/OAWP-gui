@@ -5,3 +5,6 @@ packaging/
 *.ui#
 *.glade\~
 *.glade#
+Makefile
+/.cache/clangd
+/Testing/
