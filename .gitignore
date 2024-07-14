@@ -8,3 +8,4 @@ packaging/
 Makefile
 /.cache/clangd
 /Testing/
+logfile.log
