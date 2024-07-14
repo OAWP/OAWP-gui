@@ -62,7 +62,7 @@ struct on_cancel_struct {
 /* ==FUNCTIONS== */
 
 /* Activate Gtk */
-static void activate();
+static void activate(GApplication *app, gpointer user_data);
 
 /* File chooser's file filter */
 static GtkFileFilter *get_oawp_file_filter();

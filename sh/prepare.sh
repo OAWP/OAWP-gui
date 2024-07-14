@@ -55,7 +55,7 @@ check_deps() {
     BSD_DEPENDENCIES="${BSD_DEPENDENCIES} gmake"
   fi
 
-  if [ ! -x "$(pkg-config libconfig)" ] || [ ! -f "/usr/include/libconfig.h" ]; then
+  if [ -x "$(pkg-config libconfig)" ] || [ ! -f "/usr/include/libconfig.h" ]; then
     log_info "${GREEN}libconfig${ENDCOLOR} not detected, adding it in the dependencies install queue"
     DEPENDENCIES="${DEPENDENCIES} libconfig"
     DEB_DEPENDENCIES="${DEB_DEPENDENCIES} libconfig-dev"
@@ -63,7 +63,7 @@ check_deps() {
     BSD_DEPENDENCIES="${BSD_DEPENDENCIES} libconfig"
   fi
 
-  if [ ! -x "$(pkg-config gtk+-3.0)" ] || [ ! -f "/usr/include/gtk-3.0/gtk/gtk.h" ]; then
+  if [ -x "$(pkg-config gtk+-3.0)" ] || [ ! -f "/usr/include/gtk-3.0/gtk/gtk.h" ]; then
     log_info "${GREEN}gtk${ENDCOLOR} not detected, adding it in the dependencies install queue"
     DEPENDENCIES="${DEPENDENCIES} gtk3"
     DEB_DEPENDENCIES="${DEB_DEPENDENCIES} libgtk-3-dev"
@@ -71,7 +71,7 @@ check_deps() {
     BSD_DEPENDENCIES="${BSD_DEPENDENCIES} gtk3"
   fi
 
-  if [ ! -x "$(pkg-config glib-2.0)" ] || [ ! -f "/usr/include/glib-2.0/glib.h" ]; then
+  if [ -x "$(pkg-config glib-2.0)" ] || [ ! -f "/usr/include/glib-2.0/glib.h" ]; then
     log_info "${GREEN}glib${ENDCOLOR} not detected, adding it in the dependencies install queue"
     DEPENDENCIES="${DEPENDENCIES} glib2"
     DEB_DEPENDENCIES="${DEB_DEPENDENCIES} libglib2.0-dev"

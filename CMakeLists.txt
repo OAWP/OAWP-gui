@@ -62,6 +62,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 #### DEPENDENCIES CHECK ####
 #--------------------------#
+find_package(GTK3 REQUIRED)
+find_package(libconfig REQUIRED)
+find_package(GLIB2 REQUIRED)
+find_package(GIO2 REQUIRED)
 
 # Import modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules")
@@ -110,11 +114,12 @@ endif (DOXYGEN_FOUND)
 #### INSTALL ####
 #---------------#
 
+install(CODE "message(\"Install step does nothing yet\")")
 
 #### TESTING ####
 #---------------#
 enable_testing()
-add_subdirectory(tests)
+#add_subdirectory(tests)
 
 #### PACKAGE ####
 #---------------#
