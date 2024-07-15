@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 TheRealOne78 <bajcsielias78@gmail.com>
+ * Copyright (C) 2023-2024 TheRealOne78 <bajcsielias78@gmail.com>
  *
  * This file is part of the OAWP project
  *
@@ -17,6 +17,9 @@
  * along with OAWP. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "dir-handler.h"
+#include "history.h"
+
 #ifndef __OAWP_GUI_H__
 # define __OAWP_GUI_H__
 
@@ -25,56 +28,7 @@
 # define DEFAULT_CONFIG_PATH "~/.config/oawp/"
 #endif
 
-/* ==STRUCTS== */
-
-/* All stacks */
-struct stacks {
-  GObject *window;
-  /* == Stacks and their childs == */
-  GObject *window_headerbar;
-  /* Headerbar's stack */
-  GObject *window_headerbar_grid_stack; /* (GtkStack) */
-  GObject *window_headerbar_grid_stack_0_grid; /* (GtkGrid) - child of headerbar stack */
-  GObject *window_headerbar_grid_stack_1_buttonbox; /* (GtkButtonBox) - child of headerbar stack */
-  GObject *window_headerbar_grid_stack_2_buttonbox; /* (GtkButtonBox) - child of headerbar stack */
-  /* Body's workbench stack */
-  GObject *body_workbench_stack; /* (GtkStack) */
-  GObject *workbench_config_paned; /* (GtkPaned) - child of workbench stack */
-  GObject *workbench_convert_paned; /* (GtkPaned) - child of workbench stack */
-  /* Workbench's home stack */
-  GObject *workbench_home_stack; /* (GtkStack) - child of workbench stack */
-  GObject *workbench_home_stack_empty_history; /* (GtkLabel) - child of home stack */
-  GObject *workbench_home_stack_has_history; /* (GtkFixed) - child of home stack */
-};
-
-/* About info */
-struct on_about_info_struct {
-  GObject *statusbar;
-  GObject *popup;
-};
-
-/* Cancel */
-struct on_cancel_struct {
-  struct stacks *stacks_struct;
-  GObject *popup_cancel_w;
-};
-
-/* ==FUNCTIONS== */
-
-/* Activate Gtk */
-static void activate(GApplication *app, gpointer user_data);
-
-/* File chooser's file filter */
-static GtkFileFilter *get_oawp_file_filter();
-
-/* Callback functions Gtk signals will run */
-static void on_select_configuration_file(GtkWidget *widget, gpointer data);
-static void on_create_configuration_file(GtkWidget *widget, gpointer data);
-static void on_cancel(GtkWidget *widget, gpointer data);
-static void on_config_save(GtkWidget *widget, gpointer data);
-static void on_config_set_as_default(GtkWidget *widget, gpointer data);
-static void on_convert_images(GtkWidget *widget, gpointer data);
-static void on_clear_history(GtkWidget *widget, gpointer data);
-static void on_about_info(GtkWidget *widget, gpointer data);
+extern char default_config_path[PATH_MAX];
+extern OawpHistory_t history;
 
 # endif

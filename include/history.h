@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 TheRealOne78 <bajcsielias78@gmail.com>
+ * Copyright (C) 2023-2024 TheRealOne78 <bajcsielias78@gmail.com>
  *
  * This file is part of the OAWP project
  *
@@ -20,6 +20,9 @@
 #ifndef __HISTORY_H__
 # define __HISTORY_H__
 
+#include <stdint.h>
+#include "dir-handler.h"
+
 /* ==DEFINE== */
 
 #ifndef HISTORY_MAX
@@ -34,21 +37,21 @@
 /* ==STRUCTS== */
 
 /*
- * XawpHistoryLinkedList_t
+ * OawpHistoryLinkedList_t
  * Contains the linked list of config paths
  */
-typedef struct XawpHistoryLinkedList {
+typedef struct OawpHistoryLinkedList {
   /* Path data */
   char confFilePath[PATH_MAX];
   /* pointer to next node */
-  struct XawpHistoryLinkedList *next;
-} XawpHistoryLinkedList_t;
+  struct OawpHistoryLinkedList *next;
+} OawpHistoryLinkedList_t;
 
 /*
- * XawpHistory_t
- * Contains the XawpHistoryLinkedList linked list and indexing variables
+ * OawpHistory_t
+ * Contains the OawpHistoryLinkedList linked list and indexing variables
  */
-typedef struct XawpHistory {
+typedef struct OawpHistory {
   /* The cache file */
   char cacheFilePath[PATH_MAX];
 
@@ -56,21 +59,21 @@ typedef struct XawpHistory {
   uint64_t configsCount;
 
   /* Head of linked list */
-  XawpHistoryLinkedList_t *head;
+  OawpHistoryLinkedList_t *head;
 
   /* Last item pointer */
-  XawpHistoryLinkedList_t *lastPtr;
-} XawpHistory_t;
+  OawpHistoryLinkedList_t *lastPtr;
+} OawpHistory_t;
 
 
 /* ==FUNCTIONS== */
 
 /*
- * This init function initiates everything necessary into XawpHistory_t like
+ * This init function initiates everything necessary into OawpHistory_t like
  * loading the config paths from the cache file into the linked list.
  */
 int history_init(
-    XawpHistory_t *history,  /* History structure to save on */
+    OawpHistory_t *history,  /* History structure to save on */
     char *cacheFilePath);    /* History file to read from */
 
 /*
@@ -78,32 +81,32 @@ int history_init(
  * of config paths.
  */
 int history_refresh(
-    XawpHistory_t *history); /* History structure to refresh */
+    OawpHistory_t *history); /* History structure to refresh */
 
 /*
  * This unreference functions makes sure every byte from the passed struct is
  * deallocated. Mostly used when cleaning up before exiting.
  */
 int history_unref(
-    XawpHistory_t *history); /* History structure to deallocate */
+    OawpHistory_t *history); /* History structure to deallocate */
 
 
 /* Getters and setters */
 
 /*
- * This setter function sets a new path at the begining of a XawpHistory_t
+ * This setter function sets a new path at the begining of a OawpHistory_t
  * type linked list and it's cache file.
  */
 int history_set_list(
-    XawpHistory_t *history,  /* History structure to set value */
+    OawpHistory_t *history,  /* History structure to set value */
     char *configPath);       /* Path value to set */
 
-/* This getter function gets a path at a specific index of a XawpHistory_t
+/* This getter function gets a path at a specific index of a OawpHistory_t
  * type linked list and it's cache file.
  */
 int history_get_list(
     char dest[PATH_MAX],     /* Destination string array */
-    XawpHistory_t *history,  /* History structure to get element from */
+    OawpHistory_t *history,  /* History structure to get element from */
     uint8_t index);          /* Index to set element */
 
 
@@ -111,17 +114,17 @@ int history_get_list(
 
 /*
  * This setter function clears a specific path value at a specific index of a
- * XawpHistory_t type linked list and it's text element inside cache file.
+ * OawpHistory_t type linked list and it's text element inside cache file.
  */
 int history_clear_element(
-    XawpHistory_t *history,  /* History structure to clear */
+    OawpHistory_t *history,  /* History structure to clear */
     uint8_t index);          /* Index to clear element */
 
-/* This function clears all the path values inside a XawpHistory_t type
+/* This function clears all the path values inside a OawpHistory_t type
  * linked list and the text inside it's cache file.
  */
 int history_clear_all(
-    XawpHistory_t *history); /* History structure to clear */
+    OawpHistory_t *history); /* History structure to clear */
 
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 TheRealOne78 <bajcsielias78@gmail.com>
+ * Copyright (C) 2023-2024 TheRealOne78 <bajcsielias78@gmail.com>
  *
  * This file is part of the OAWP project
  *
@@ -28,9 +28,9 @@
 #include "dir-handler.h"
 #include "history.h"
 
-int history_init(XawpHistory_t *history, char *cacheFilePath) {
+int history_init(OawpHistory_t *history, char *cacheFilePath) {
 
-  /* This init function initiates everything necessary into XawpHistory_t like
+  /* This init function initiates everything necessary into OawpHistory_t like
    * loading the config paths from the cache file into the linked list. */
 
   /* Check if the path is correct and if it's not, fix it */
@@ -71,10 +71,10 @@ int history_init(XawpHistory_t *history, char *cacheFilePath) {
   size_t len = 0;
   ssize_t read;
 
-  XawpHistoryLinkedList_t *temp;
+  OawpHistoryLinkedList_t *temp;
   while((read = getline(&line, &len, cacheFile)) != -1) {
 
-    temp = (XawpHistoryLinkedList_t* )malloc(sizeof(XawpHistoryLinkedList_t));
+    temp = (OawpHistoryLinkedList_t* )malloc(sizeof(OawpHistoryLinkedList_t));
     temp->next = NULL;
 
     strcpy(temp->confFilePath, line);
@@ -127,7 +127,7 @@ int history_init(XawpHistory_t *history, char *cacheFilePath) {
   return 0;
 }
 
-int history_refresh(XawpHistory_t *history) {
+int history_refresh(OawpHistory_t *history) {
 
   /* This function refreshes the linked list from the struct to an updated list
    * of config paths. */
@@ -148,7 +148,7 @@ int history_refresh(XawpHistory_t *history) {
   return 0;
 }
 
-int history_unref(XawpHistory_t *history) {
+int history_unref(OawpHistory_t *history) {
 
   /* This unreference functions makes sure every byte from the passed struct is
    * deallocated. Mostly used when cleaning up before exiting. */
@@ -159,8 +159,8 @@ int history_unref(XawpHistory_t *history) {
   /* Reset the image count */
   history->configsCount = 0;
 
-  XawpHistoryLinkedList_t *temp;
-  XawpHistoryLinkedList_t *temp2;
+  OawpHistoryLinkedList_t *temp;
+  OawpHistoryLinkedList_t *temp2;
 
   temp = history->head;
 
@@ -178,14 +178,14 @@ int history_unref(XawpHistory_t *history) {
   return 0;
 }
 
-int history_set_list(XawpHistory_t *history, char *configPath) {
+int history_set_list(OawpHistory_t *history, char *configPath) {
 
-  /* This setter function sets a new path at the begining of a XawpHistory_t
+  /* This setter function sets a new path at the begining of a OawpHistory_t
    * type linked list and it's cache file. */
 
-  XawpHistoryLinkedList_t *temp;
+  OawpHistoryLinkedList_t *temp;
 
-  temp = (XawpHistoryLinkedList_t* )malloc(sizeof(XawpHistoryLinkedList_t));
+  temp = (OawpHistoryLinkedList_t* )malloc(sizeof(OawpHistoryLinkedList_t));
   strcpy(temp->confFilePath, configPath);
   temp->next = history->head;
   history->head = temp;
@@ -221,12 +221,12 @@ int history_set_list(XawpHistory_t *history, char *configPath) {
   return 0;
 }
 
-int history_get_list(char dest[PATH_MAX], XawpHistory_t *history, uint8_t index) {
+int history_get_list(char dest[PATH_MAX], OawpHistory_t *history, uint8_t index) {
 
-  /* This getter function gets a path at a specific index of a XawpHistory_t
+  /* This getter function gets a path at a specific index of a OawpHistory_t
    * type linked list and it's cache file. */
 
-  XawpHistoryLinkedList_t *temp;
+  OawpHistoryLinkedList_t *temp;
 
   if(history->head != NULL) {
     temp = history->head;
@@ -244,10 +244,10 @@ int history_get_list(char dest[PATH_MAX], XawpHistory_t *history, uint8_t index)
   return 0;
 }
 
-int history_clear_element(XawpHistory_t *history, uint8_t index) {
+int history_clear_element(OawpHistory_t *history, uint8_t index) {
 
   /* This setter function clears a specific path value at a specific index of a
-   * XawpHistory_t type linked list and it's text element inside cache file. */
+   * OawpHistory_t type linked list and it's text element inside cache file. */
 
   if(index == 0) {
     fprintf(stderr, ERR_TEXT_PUTS"Index 0 is not valid. Can't clear element from cache file\n");
@@ -259,7 +259,7 @@ int history_clear_element(XawpHistory_t *history, uint8_t index) {
     return -1;
   }
 
-  XawpHistoryLinkedList_t *temp1 = history->head;
+  OawpHistoryLinkedList_t *temp1 = history->head;
   /* If index position is 1, traversing the list is useless */
   if(index == 1) {
     history->head = temp1->next;
@@ -272,7 +272,7 @@ int history_clear_element(XawpHistory_t *history, uint8_t index) {
     temp1 = temp1->next;
 
   /* Fix links and free the old node */
-  XawpHistoryLinkedList_t *temp2 = temp1->next;
+  OawpHistoryLinkedList_t *temp2 = temp1->next;
   temp1->next = temp2->next;
   free(temp2);
 
@@ -307,9 +307,9 @@ int history_clear_element(XawpHistory_t *history, uint8_t index) {
   return 0;
 }
 
-int history_clear_all(XawpHistory_t *history) {
+int history_clear_all(OawpHistory_t *history) {
 
-  /* This function clears all the path values inside a XawpHistory_t type
+  /* This function clears all the path values inside a OawpHistory_t type
    * linked list and the text inside it's cache file. */
 
   /* Delete the cache file from the system */

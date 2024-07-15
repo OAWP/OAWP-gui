@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 TheRealOne78 <bajcsielias78@gmail.com>
+ * Copyright (C) 2023-2024 TheRealOne78 <bajcsielias78@gmail.com>
  *
  * This file is part of the OAWP project
  *
@@ -20,33 +20,30 @@
 #ifndef __OAWP_CONF_H__
  #define __OAWP_CONF_H__
 
+#include "dir-handler.h"
 
 /* ==STRUCTURES== */
-
-struct XawpConfValues {
-  char version[VERSION_MAX];       /* Version of OAWP-gui */
+struct OawpConfValues {
+  char version[12];                /* Version */
   char path[PATH_MAX];             /* Image path */
   double time;                     /* Frame pause time */
   char debug[6];                   /* Debug: True/False (bool to string) */
   char static_wallpaper[PATH_MAX]; /* Static wallpaper path */
 };
 
-
 /* ==FUNCTIONS== */
-
 /* Read configs from conf file and save the values into *oawpConfValues */
 int OAWP_CONF_ReadConfig(
-    struct XawpConfValues *oawpConfValues,  /* Values to save the values */
+    struct OawpConfValues *oawpConfValues,  /* Values to save the values */
     char confPath[PATH_MAX]);               /* File to read from */
 
 /* Write the settings into the specified conf file path */
 int OAWP_CONF_WriteConfig(
-    struct XawpConfValues *oawpConfValues,  /* Values to be written */
+    struct OawpConfValues *oawpConfValues,  /* Values to be written */
     char confPath[PATH_MAX]);               /* File to write */
 
 /* Clear the contents of *oawpConfValues */
 void OAWP_CONF_Clear(
-    struct XawpConfValues *oawpConfValues); /* Values to clear */
-
+    struct OawpConfValues *oawpConfValues); /* Values to clear */
 
 #endif /* __OAWP_CONF_H__ */

@@ -66,6 +66,7 @@ find_package(GTK3 REQUIRED)
 find_package(libconfig REQUIRED)
 find_package(GLIB2 REQUIRED)
 find_package(GIO2 REQUIRED)
+find_package(PCRE REQUIRED)
 
 # Import modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules")
@@ -113,8 +114,9 @@ endif (DOXYGEN_FOUND)
 
 #### INSTALL ####
 #---------------#
+install(TARGETS "${PROJECT_NAME}")
 
-install(CODE "message(\"Install step does nothing yet\")")
+install(DIRECTORY "./assets/" DESTINATION "share/oawp-gui")
 
 #### TESTING ####
 #---------------#

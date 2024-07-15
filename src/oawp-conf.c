@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 TheRealOne78 <bajcsielias78@gmail.com>
+ * Copyright (C) 2023-2024 TheRealOne78 <bajcsielias78@gmail.com>
  *
  * This file is part of the OAWP project
  *
@@ -24,12 +24,9 @@
 
 #include "info.h"
 #include "fancy-text.h"
-#include "dir-handler.h"
 #include "oawp-conf.h"
 
-
-int OAWP_CONF_ReadConfig(struct XawpConfValues *oawpConfValues, char confPath[PATH_MAX]) {
-
+int OAWP_CONF_ReadConfig(struct OawpConfValues *oawpConfValues, char confPath[PATH_MAX]) {
   /*
    * Read configs from conf file and save the values into *oawpConfValues
    */
@@ -69,7 +66,7 @@ int OAWP_CONF_ReadConfig(struct XawpConfValues *oawpConfValues, char confPath[PA
   if(config_lookup_float(&cfg, "time", &time))
     oawpConfValues->time = time;
   else
-    oawpConfValues->time = -1.d;
+    oawpConfValues->time = -1.f;
 
   /* Debug */
   int cfgDebug;
@@ -96,7 +93,7 @@ int OAWP_CONF_ReadConfig(struct XawpConfValues *oawpConfValues, char confPath[PA
 }
 
 
-int OAWP_CONF_WriteConfig(struct XawpConfValues *oawpConfValues, char confPath[PATH_MAX]) {
+int OAWP_CONF_WriteConfig(struct OawpConfValues *oawpConfValues, char confPath[PATH_MAX]) {
 
   /*
    * Write the settings into the specified conf file path
@@ -113,7 +110,7 @@ int OAWP_CONF_WriteConfig(struct XawpConfValues *oawpConfValues, char confPath[P
 
   /* OAWP-gui version */ {
     fprintf(fp, "### %s - generated with OAWP-gui\n", basename(confPath));
-    fprintf(fp, "# v%s\n", VERSION);
+    fprintf(fp, "# v%s\n", __VERSION_STR);
     fprintf(fp, "#\n");
   }
 
@@ -169,7 +166,7 @@ int OAWP_CONF_WriteConfig(struct XawpConfValues *oawpConfValues, char confPath[P
     fprintf(fp, "### Static Image Wallpaper\n");
     fprintf(fp, "# If uncommented, OAWP will set the wallpaper and exit\n");
 
-    if(oawpConfValues->static_wallpaper[0] = '\0')
+    if(oawpConfValues->static_wallpaper[0] == '\0')
       fprintf(fp, "#");
 
     fprintf(fp, "static-wallpaper = \"%s\"\n", oawpConfValues->static_wallpaper);
@@ -185,15 +182,13 @@ int OAWP_CONF_WriteConfig(struct XawpConfValues *oawpConfValues, char confPath[P
 }
 
 
-void OAWP_CONF_Clear(struct XawpConfValues *oawpConfValues) {
-
+void OAWP_CONF_Clear(struct OawpConfValues *oawpConfValues) {
   /*
    * Clear the contents of *oawpConfValues
    */
-
   oawpConfValues->version[0]          = '\0';
   oawpConfValues->path[0]             = '\0';
-  oawpConfValues->time                = -1.d;
+  oawpConfValues->time                = -1.f;
   oawpConfValues->debug[0]            = '\0';
   oawpConfValues->static_wallpaper[0] = '\0';
 }

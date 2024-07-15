@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 TheRealOne78 <bajcsielias78@gmail.com>
+ * Copyright (C) 2023-2024 TheRealOne78 <bajcsielias78@gmail.com>
  *
  * This file is part of the OAWP project
  *
@@ -17,11 +17,10 @@
  * along with OAWP. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __DIR_CHECKER_H__
-# define __DIR_CHECKER_H__
+#ifndef __DIR_HANDLER_H__
+# define __DIR_HANDLER_H__
 
-
-/* ==DEFINE== */
+#include <stdint.h>
 
 /* Get the maximum path size based of
  * different operating systems. */
@@ -32,32 +31,37 @@
     #include <limits.h>
   #elif __APPLE__
     #include <limits.h>
-  #endif /* __linux__ */
-#endif /* PATH_MAX */
+  #elif _WIN32
+    #include <windef.h>
+      #define PATH_MAX MAX_PATH
+  #endif // __linux__
+#endif // PATH_MAX
 
-
-/* ==FUNCTIONS== */
-
-/*
- * This function checks if the first character is a '~'.
+/**
+ * @brief Check if the first character is a '~'.
  * If so, this function will replace the '~' with a propper
  * "/home/user/" path.
  *
- * Thanks to OpenAI's ChatGPT for all the help!
- */
-void formatPath(
-    char *path,                    /* Path to be formatted */
-    char formattedPath[PATH_MAX]); /* Formatted path */
-
-/*
- * This function checks and creates directories for the
- * taget directory through an iteration, like `mkdir -p`
- * does.
+ * @param path Input path.
+ * @param formatted_path Output formatted path.
  *
- * Thanks to OpenAI's ChatGPT for all the help!
+ * @return 0 if everything is alright.
+ *
+ * @note Thanks to OpenAI's ChatGPT for all the help!
  */
-void verifyDirPath(
-    char path[PATH_MAX]);          /* Path to check and create directory */
+uint8_t formatPath(const char *restrict path, char formatted_path[PATH_MAX]);
 
+/**
+ * @brief Check if the directory exists.  If not, create them.
+ *
+ * @param path Path to check.
+ *
+ * @note Thanks to OpenAI's ChatGPT for all the help!
+ *
+ * @return 0 if everything is alright, 1 if errors occured.
+ */
+uint8_t verifyDirPath(const char path[PATH_MAX]);
 
-#endif /* __DIR_CHECKER_H__ */
+int compare_fun (const void *restrict p, const void *restrict q);
+
+#endif // __DIR_HANDLER_H__

@@ -30,8 +30,10 @@ set("${PROJECT_NAME}_SRC"
   dir-handler.c
   fancy-text.c
   history.c
+  log.c
   oawp-conf.c
   oawp-gui.c
+  ui.c
 )
 
 add_executable(${PROJECT_NAME}
@@ -55,6 +57,7 @@ target_link_libraries("${PROJECT_NAME}"
   "${GTK3_LIBRARIES}"
   "${GIO2_LINK_LIBRARIES}"
   "${LIBCONFIG_LIBRARIES}"
+  "${LIBPCRE_LINK_LIBRARIES}"
 )
 
 # Set the output directory for executables
