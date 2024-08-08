@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./icons/OAWP_logo_row_v2.svg" width="50%">
+  <img src="./assets/icons/OAWP_logo_row_v2.svg" width="50%">
 </p>
 
 # OAWP-gui
@@ -12,7 +12,7 @@ Written in C with the GTK+ toolkit.
 * [X] Create a basic GTK UI
 * [ ] Add a fancy history list in the start menu with image preview and options
 * [X] Create the OAWP logo
-* [X] Create a [SVG logo](./icons/logo_gradient_v2.svg) with X derived from the [Xorg/X11 logo](https://www.x.org/wiki/)
+* [X] Create a [SVG logo](./assets/icons/logo_gradient_v2.svg) with X derived from the [Xorg/X11 logo](https://www.x.org/wiki/)
 * [ ] Create a [SVG logo]() with a W derived from the [Wayland logo](https://wayland.freedesktop.org/)
 * [ ] Create a [SVG logo]() for WinAWP
 * [ ] Create a [SVG logo]() for MAWP
