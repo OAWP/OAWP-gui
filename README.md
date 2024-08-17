@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/icons/OAWP_logo_row_v2.svg" width="50%">
+  <img src="./assets/icons/OAWP_logo_row_v2.svg" width="50%" alt="Banner">
 </p>
 
 # OAWP-gui
